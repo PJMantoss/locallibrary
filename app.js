@@ -38,4 +38,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+//mongodb+srv://Joel2:kingofglory@cluster0-sffs5.mongodb.net/local_library?retryWrites=true&w=majority
+
 module.exports = app;
