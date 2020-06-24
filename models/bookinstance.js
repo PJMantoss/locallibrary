@@ -10,3 +10,11 @@ let BookInstanceSchema = new Schema(
         due_back: {type: Date, default: Date.now}
     }
 )
+
+//Virtualization for BookInstance's URL
+BookInstanceSchema.virtual('url').get(function(){
+    return '/catalog/bookinstance/' + this._id;
+})
+
+//Export module
+module.exports = mongoose.model('BookInstance', BookInstanceSchema);
