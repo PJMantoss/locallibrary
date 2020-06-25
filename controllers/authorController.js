@@ -34,3 +34,8 @@ exports.author_delete_post = function(req, res){
 exports.author_update_get = function(req, res){
     res.send('NOT IMPLEMENTED: Author update GET')
 }
+
+//Handle Author update on POST
+exports.author_update_post = function(req, res){
+    res.send('NOT IMPLEMENTED: Author update POST')
+}
