@@ -60,3 +60,5 @@ router.post('/author/:id/update', author_controller.author_update_post);
 // GET request for one Author.
 router.get('/author/:id', author_controller.author_detail);
 
+// GET request for list of all Authors.
+router.get('/authors', author_controller.author_list);
