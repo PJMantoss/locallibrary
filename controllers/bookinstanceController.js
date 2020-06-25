@@ -34,3 +34,8 @@ exports.bookinstance_delete_post = function(req, res){
 exports.bookinstance_update_get = function(req, res){
     res.send('NOT IMPLEMENTED: BookInstance update GET')
 }
+
+//Handle BookInstance update on POST
+exports.bookinstance_update_post = function(req, res){
+    res.send('NOT IMPLEMENTED: BookInstance update POST')
+}
