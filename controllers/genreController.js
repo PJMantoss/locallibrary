@@ -23,7 +23,14 @@ exports.genre_detail = function(req, res){
 
 //Display Genre create form on GET
 exports.genre_create_get = function(req, res){
-    async.parallel({}, function(err, results){})
+    async.parallel({
+        genre: function(callback){
+            genre.findById(req.params.id).exec(callback);
+        },
+        genre_books: function(callback){
+            Book.find({'genre': req.params.id}).exec(callback);
+        }
+    }, function(err, results){})
 }
 
 //Handle Genre create on POST 
