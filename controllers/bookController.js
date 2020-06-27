@@ -16,10 +16,16 @@ exports.index = function(req, res){
         book_instance_available_count: function(callback){
             BookInstance.countDocuments({status: 'Available'}, callback);
         },
-        author_count: function(callback){},
-        genre_count: function(callback){},
-    }, function(err, results){});
-}
+        author_count: function(callback){
+            Author.countDocuments({}, callback);
+        },
+        genre_count: function(callback){
+            Genre.countDocuments({}, callback);
+        },
+    }, function(err, results){
+        res.render('index', {});
+    });
+};
 
 //Display list of all Books
 exports.book_list = function(req, res){
