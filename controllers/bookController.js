@@ -5,7 +5,7 @@ let BookInstance = require('../models/bookinstance');
 
 let async = require('async');
 
-exports.index = function(req, res){
+exports.index = function(req, res, next){
     async.parallel({
         book_count: function(callback){
             Book.countDocuments({}, callback);
@@ -28,8 +28,12 @@ exports.index = function(req, res){
 };
 
 //Display list of all Books
-exports.book_list = function(req, res){
-    res.send('NOT IMPLEMENTED: Book list')
+exports.book_list = function(req, res, next){
+    Book.find({}, 'title author').populate('author').exec(function(err, list_books){
+        if(err){return next(err);};
+        //If successful, render
+        res.render()
+    });
 }
 
 //Display detail page for a specific Book
