@@ -1,4 +1,6 @@
 let Book = require('../models/book');
+let Author = require('../models/author');
+let Genre = require('../models/genre');
 
 exports.index = function(req, res){
     res.send('NOT IMPLEMENTED: Site Home Page')
