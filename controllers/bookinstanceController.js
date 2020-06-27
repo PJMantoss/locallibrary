@@ -11,7 +11,7 @@ exports.bookinstance_list = function(req, res, next){
 }
 
 //Display detail page for a specific Book instance
-exports.bookinstance_detail = function(req, res, next){
+exports.bookinstance_detail = function(req, res){
     res.send('NOT IMPLEMENTED: BookInstance list: ' + req.params.id)
 };
 
