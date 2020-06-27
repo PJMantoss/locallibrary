@@ -17,12 +17,7 @@ exports.genre_list = function(req, res, next){
 }
 
 //Display detail page for a specific genre
-exports.genre_detail = function(req, res){
-    res.send('NOT IMPLEMENTED: Genre detail: ' + req.params.id)
-}
-
-//Display Genre create form on GET
-exports.genre_create_get = function(req, res){
+exports.genre_detail = function(req, res, next){
     async.parallel({
         genre: function(callback){
             genre.findById(req.params.id).exec(callback);
@@ -30,7 +25,22 @@ exports.genre_create_get = function(req, res){
         genre_books: function(callback){
             Book.find({'genre': req.params.id}).exec(callback);
         }
-    }, function(err, results){})
+    }, function(err, results){
+        if(err){
+            return next(err);
+        }
+        if(results.genre === null){
+            let err = new Error('Genre Not Found');
+            err.status = 404;
+            return next(err);
+        }
+    })
+    
+}
+
+//Display Genre create form on GET
+exports.genre_create_get = function(req, res){
+    res.send('NOT IMPLEMENTED: Genre detail GET')
 }
 
 //Handle Genre create on POST 
