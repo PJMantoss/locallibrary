@@ -5,7 +5,13 @@ exports.genre_list = function(req, res, next){
     Genre.find()
         .populate('genre')
         .sort([['genre_name', 'ascending']])
-        .exec(function(err, list_genres){})
+        .exec(function(err, list_genres){
+            if(err){
+                return next(err);
+            }
+            //If successful render
+            res.render('genre_list', {title: 'Genre List', genre_list: list_genres});
+        })
 }
 
 //Display detail page for a specific genre
