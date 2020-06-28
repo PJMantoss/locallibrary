@@ -39,7 +39,10 @@ exports.book_list = function(req, res, next){
 //Display detail page for a specific Book
 exports.book_detail = function(req, res){
     
-    async.parallel({}, function(err, results){})
+    async.parallel({
+        book: function(callback){},
+        book_instance: function(callback){},
+    }, function(err, results){})
 }
 
 //Display Book create form on GET

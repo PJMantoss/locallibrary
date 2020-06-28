@@ -29,7 +29,7 @@ exports.genre_detail = function(req, res, next){
         },
         genre_books: function(callback){
             Book.find({ 'genre': id }).exec(callback);
-        }
+        },
     }, function(err, results){
         if(err){return next(err);}
         if(results.genre == null){
