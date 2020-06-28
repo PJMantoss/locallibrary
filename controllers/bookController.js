@@ -38,7 +38,8 @@ exports.book_list = function(req, res, next){
 
 //Display detail page for a specific Book
 exports.book_detail = function(req, res){
-    res.send('NOT IMPLEMENTED: Book detail: ' + req.params.id)
+    
+    async.parallel({}, function(err, results){})
 }
 
 //Display Book create form on GET
