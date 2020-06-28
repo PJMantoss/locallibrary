@@ -40,9 +40,26 @@ exports.book_list = function(req, res, next){
 exports.book_detail = function(req, res){
     
     async.parallel({
-        book: function(callback){},
-        book_instance: function(callback){},
-    }, function(err, results){})
+        book: function(callback){
+            Book.findById(req.params.id)
+               .populate('author')
+               .populate('genre')
+               .exec(callback);
+        },
+        book_instance: function(callback){
+            BookInstance.find({ 'genre': req.params.id })
+                .exec(callback);
+        },
+    }, function(err, results){
+        if(err){return next(err);}
+        if(results.book == null){
+            let err = new Error('Book not found');
+            err.status = 404;
+            return next(err);
+        }
+        //Successful, so render
+        res.render('book_detail', {title: results.book.title, book: results.book, book_instances: results.book_instance })
+    })
 }
 
 //Display Book create form on GET
