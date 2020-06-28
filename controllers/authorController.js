@@ -25,7 +25,7 @@ exports.author_detail = function(req, res){
                 .exec(callback);
         },
     }, function(err, results){
-        if(err){return next(err);} //
+        if(err){return next(err);} //Error in API usage
         if(results.author==null){
             let err = new Error('Author not found');
             err.status = 404;
