@@ -51,13 +51,12 @@ exports.genre_create_get = function(req, res, next){
 }
 
 //Handle Genre create on POST 
-exports.genre_create_post = function(req, res){
-
+exports.genre_create_post = [
     //Validate that the name field is not empty
-    validator.body('name', 'Genre name required').trim().isLength({ min: 1 })
+    validator.body('name', 'Genre name required').trim().isLength({ min: 1 }),
 
     //Sanitize(escape) the name field
-    validator.sanitizeBody('name').escape();
+    validator.sanitizeBody('name').escape(),
 
     //Process request after validation and sanitization
     (req, res, next) => {
@@ -94,7 +93,7 @@ exports.genre_create_post = function(req, res){
                 });
         }
     }
-}
+];
 
 //Display Genre delete form on GET
 exports.genre_delete_get = function(req, res){
