@@ -58,6 +58,23 @@ exports.genre_create_post = function(req, res){
 
     //Sanitize(escape) the name field
     validator.sanitizeBody('name').escape();
+
+    //Process request after validation and sanitization
+    (req, res, next) => {
+
+        //Extract the validation errors from a request
+        const errors = validator.validationResult(req);
+
+        //Create a genre object with escaped and trimmed and data
+        let genre = new Genre(
+            {name: req.body.name}
+        );
+
+        if(!errors.isEmpty()){
+            //There are errors. Render the form again with sanitized values/error messages.
+            res.render('genre_form', {title: 'Create Genre', genre: genre, errors: errors.array()});
+        }
+    }
 }
 
 //Display Genre delete form on GET
