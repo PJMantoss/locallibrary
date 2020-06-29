@@ -4,6 +4,8 @@ let async = require('async');
 
 let mongoose = require('mongoose');
 
+const validator = require('express-validator');
+
 //Display list of all genre
 exports.genre_list = function(req, res, next){
     Genre.find()
@@ -44,13 +46,18 @@ exports.genre_detail = function(req, res, next){
 };
 
 //Display Genre create form on GET
-exports.genre_create_get = function(req, res){
-    res.send('NOT IMPLEMENTED: Genre create GET')
+exports.genre_create_get = function(req, res, next){
+    res.render('genre_form', {title: 'Create Genre'})
 }
 
 //Handle Genre create on POST 
 exports.genre_create_post = function(req, res){
-    res.send('NOT IMPLEMENTED: Genre create POST')
+
+    //Validate that the name field is not empty
+    validator.body('name', 'Genre name required').trim().isLength({ min: 1 })
+
+    //Sanitize(escape) the name field
+    validator.sanitizeBody('name').escape();
 }
 
 //Display Genre delete form on GET
