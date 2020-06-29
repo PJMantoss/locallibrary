@@ -78,8 +78,20 @@ exports.genre_create_post = function(req, res){
         else{
             //Data is valid
             //Check if Genre with same name already exists
-            Genre.findOne({name: req.body.name})
-                .exec(function(err, found_genre){});
+            Genre.findOne({'name': req.body.name})
+                .exec(function(err, found_genre){
+                    if(err){ return next(err); }
+
+                    if(found_genre){ //Genre exists. Redirect to its detail page
+                        res.redirect(found_genre.url);
+                    } else {
+                        genre.save(function(err){
+                            if(err){ return next(err); }
+                            //Genre saved. Redirect to genre detail page
+                            res.redirect(genre.url)
+                        })
+                    }
+                });
         }
     }
 }
