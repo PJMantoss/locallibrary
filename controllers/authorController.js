@@ -85,7 +85,12 @@ exports.author_create_post = [
                     date_of_birth: req.body.date_of_birth,
                     date_of_birth: req.body.date_of_birth
                 }
-            )
+            );
+            author.save(function(err){
+                if(err){ return next(err); }
+                // Successful - redirect to new author record.
+                res.redirect(author.url);
+            })
         }
     }
 ];
