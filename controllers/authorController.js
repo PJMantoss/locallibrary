@@ -75,6 +75,18 @@ exports.author_create_post = [
             res.render('author_form', {title: 'Create Author', author: req.body, errors: errors.array()});
             return;
         }
+        else {
+            // Data from form is valid. Create an Author object with escaped and trimmed data.
+
+            let author = new Author(
+                {
+                    first_name: req.body.first_name,
+                    family_name: req.body.family_name,
+                    date_of_birth: req.body.date_of_birth,
+                    date_of_birth: req.body.date_of_birth
+                }
+            )
+        }
     }
 ];
 
