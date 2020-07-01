@@ -54,11 +54,15 @@ exports.author_create_post = [
     body('family_name').isLength({ min: 1 }).trim().withMessage('Family name must be specified.')
         .isAlphanumeric().withMessage('Family name has non-alphanumeric characters.'),
 
-    body().optional().isISO8601(),
+    body('date_of_birth', 'Invalid Date of Birth').optional({ checkFalsy: true }).isISO8601(),
 
-    body().optional().isISO8601()
+    body('date_of_death', 'Invalid Date of Death').optional().isISO8601(),
 
     // Sanitize fields.
+    sanitizeBody('first_name').escape(),
+    sanitizeBody('family_name').escape(),
+    sanitizeBody('date_of_birth').toDate(),
+    sanitizeBody('date_of_death').toDate(),
 
     // Process request after validation and sanitization.
 ];
