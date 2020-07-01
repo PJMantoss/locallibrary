@@ -48,9 +48,11 @@ exports.author_create_get = function(req, res, next){
 //Handle Author create on POST
 exports.author_create_post = [
     // Validate fields.
-    body().isLength().trim().withMessage().isAlphanumeric().withMessage(),
+    body('first_name').isLength({ min: 1 }).trim().withMessage('First name must be specified.')
+        .isAlphanumeric().withMessage('First name has non-alphanumeric characters.'),
 
-    body().isLength().trim().withMessage().isAlphanumeric().withMessage(),
+    body('family_name').isLength({ min: 1 }).trim().withMessage('Family name must be specified.')
+        .isAlphanumeric().withMessage('Family name has non-alphanumeric characters.'),
 
     body().optional().isISO8601(),
 
