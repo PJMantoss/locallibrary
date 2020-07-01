@@ -46,7 +46,20 @@ exports.author_create_get = function(req, res, next){
 }
 
 //Handle Author create on POST
-exports.author_create_post = [];
+exports.author_create_post = [
+    // Validate fields.
+    body().isLength().trim().withMessage().isAlphanumeric().withMessage(),
+
+    body().isLength().trim().withMessage().isAlphanumeric().withMessage(),
+
+    body().optional().isISO8601(),
+
+    body().optional().isISO8601()
+
+    // Sanitize fields.
+
+    // Process request after validation and sanitization.
+];
 
 //Display Author delete form on GET
 exports.author_delete_get = function(req, res){
