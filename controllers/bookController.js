@@ -90,7 +90,7 @@ exports.book_create_post = [
     // Convert the genre to an array.
     (req, res, next) => {
         if(!(req.body.genre instanceof Array)){
-            if(typeof req.body.genre=='undefined')
+            if(typeof req.body.genre==='undefined')
             req.body.genre = [];
             else
             req.body.genre = new Array(req.body.genre);
@@ -152,7 +152,11 @@ exports.book_create_post = [
         }
         else {
             // Data from form is valid. Save book.
-            book.save(function(err){})
+            book.save(function(err){
+                if(err){ return next(err); }
+                //successful - redirect to new book record.
+                res.redirect(book.url)
+            })
         }
     }
 ];
