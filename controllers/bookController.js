@@ -103,6 +103,45 @@ exports.book_create_post = [
     body('summary', 'Summary must not be empty.').trim().isLength({ min: 1 }),
     body('author', 'Author must not be empty.').trim().isLength({ min: 1 }),
     body('isbn', 'ISBN must not be empty.').trim().isLength({ min: 1 }),
+
+    // Sanitize fields (using wildcard).
+    sanitizeBody('*').escape(),
+
+    // Process request after validation and sanitization.
+    (req, res, next) => {
+           
+        // Extract the validation errors from a request.
+        const errors = validationResult(req);
+
+        // Create a Book object with escaped and trimmed data.
+        let book = new Book(
+            {
+                title: req.body.title,
+                author: req.body.author,
+                summary: req.body.summary,
+                isbn: req.body.isbn,
+                genre: req.body.genre
+            }
+        );
+
+        if(!errors.isEmpty()){
+            // There are errors. Render form again with sanitized values/error messages.
+
+            // Get all authors and genres for form.
+
+            async.parallel({
+                authors: function(callback){
+                    Author.find(callback);
+                },
+
+                genres: function(callback){
+                    Genre.find(callback);
+                },
+            }, function(err, results){
+                if(err){ return next(err); }
+            })
+        }
+    }
 ];
 
 //Display Book delete form on GET
