@@ -1,4 +1,8 @@
 let BookInstance = require('../models/bookinstance');
+let Book = require('../models/book');
+
+const { body,validationResult } = require('express-validator/check');
+const { sanitizeBody } = require('express-validator/filter');
 
 //Display list of all book instances
 exports.bookinstance_list = function(req, res, next){
@@ -32,8 +36,8 @@ exports.bookinstance_create_get = function(req, res){
 }
 
 //Handle BookInstance create on POST
-exports.bookinstance_create_post = function(req, res){
-    res.send('NOT IMPLEMENTED: BookInstance create POST')
+exports.bookinstance_create_post = function(req, res, next){
+    Book.find({},'title').exec(function(err, books){});
 }
 
 //Display BookInstance delete form on GET
