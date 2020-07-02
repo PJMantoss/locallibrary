@@ -182,7 +182,7 @@ exports.book_delete_get = function(req, res, next){
 }
 
 //Handle Book delete on POST
-exports.book_delete_post = function(req, res){
+exports.book_delete_post = function(req, res, next){
     // Assume the post has valid id (ie no validation/sanitization).
 
     async.parallel({
